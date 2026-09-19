@@ -1,0 +1,115 @@
+# =========================================
+# AI Analytics Dashboard — Root .gitignore
+# =========================================
+
+# -----------------------------------------
+# .NET / Backend
+# -----------------------------------------
+**/bin/
+**/obj/
+**/out/
+**/[Dd]ebug/
+**/[Rr]elease/
+**/x64/
+**/x86/
+**/build/
+**/bld/
+**/[Ll]og/
+**/[Ll]ogs/
+
+# Visual Studio
+**/.vs/
+**/.vscode/*
+!**/.vscode/settings.json
+!**/.vscode/tasks.json
+!**/.vscode/launch.json
+!**/.vscode/extensions.json
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+
+# MSBuild
+**/*.binlog
+**/*.tlog
+**/msbuild.log
+**/msbuild.err
+**/msbuild.wrn
+**/project.lock.json
+**/artifacts/
+
+# NuGet
+**/*.nupkg
+**/*.snupkg
+**/.nuget/
+**/packages/
+!**/packages/build/
+
+# -----------------------------------------
+# Node / Angular / Frontend
+# -----------------------------------------
+**/node_modules/
+**/dist/
+**/tmp/
+**/out-tsc/
+**/.angular/
+**/.angular/cache
+**/.sass-cache/
+**/coverage/
+**/libpeerconnection.log
+**/testem.log
+**/typings/
+**/__screenshots__/
+
+# Package manager logs
+**/npm-debug.log
+**/yarn-error.log
+**/pnpm-debug.log
+
+# -----------------------------------------
+# Environment / Secrets
+# -----------------------------------------
+.env
+.env.*
+!.env.example
+**/appsettings.Development.json
+**/appsettings.Production.json
+**/secrets.json
+**/*.pem
+**/*.key
+**/*.pfx
+
+# -----------------------------------------
+# IDE
+# -----------------------------------------
+.idea/
+**/.idea/
+**/.project
+**/.classpath
+**/.c9/
+**/*.launch
+**/.settings/
+**/.history/
+
+# -----------------------------------------
+# Database backups
+# -----------------------------------------
+**/*.sql.gz
+**/*.dump
+**/*.backup
+**/*.bak
+
+# -----------------------------------------
+# OS files
+# -----------------------------------------
+.DS_Store
+**/.DS_Store
+Thumbs.db
+**/Thumbs.db
+desktop.ini
+
+# -----------------------------------------
+# Logs
+# -----------------------------------------
+*.log
+**/*.log
