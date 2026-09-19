@@ -1,0 +1,107 @@
+<div class="dash-container">
+  <header class="dash-header">
+    <div class="logo">
+      <span class="logo-icon">&lt;/&gt;</span>
+      <span>Query<span class="accent">Nex</span> Analytics</span>
+    </div>
+    <p class="subtitle">AI-powered e-commerce intelligence dashboard</p>
+  </header>
+
+  @if (summary(); as s) {
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">Total Revenue</span>
+        <span class="kpi-value">{{ formatCurrency(s.totalRevenue) }}</span>
+        <span class="kpi-change" [class.positive]="s.revenueChangePercent >= 0" [class.negative]="s.revenueChangePercent < 0">
+          {{ s.revenueChangePercent >= 0 ? '▲' : '▼' }} {{ s.revenueChangePercent }}% MoM
+        </span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Total Orders</span>
+        <span class="kpi-value">{{ s.totalOrders }}</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Total Customers</span>
+        <span class="kpi-value">{{ s.totalCustomers }}</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Avg Order Value</span>
+        <span class="kpi-value">{{ formatCurrency(s.avgOrderValue) }}</span>
+      </div>
+    </div>
+  }
+
+  <div class="charts-grid">
+    <div class="chart-card span-2">
+      <h3>Revenue & Orders Trend</h3>
+      @if (revenueChart()) {
+        <div echarts [options]="revenueChart()" class="chart"></div>
+      }
+    </div>
+
+    <div class="chart-card">
+      <h3>Top Products by Revenue</h3>
+      @if (topProductsChart()) {
+        <div echarts [options]="topProductsChart()" class="chart"></div>
+      }
+    </div>
+
+    <div class="chart-card">
+      <h3>Customer Growth</h3>
+      @if (customerGrowthChart()) {
+        <div echarts [options]="customerGrowthChart()" class="chart"></div>
+      }
+    </div>
+
+    <div class="chart-card">
+      <h3>Revenue by Category</h3>
+      @if (categoryChart()) {
+        <div echarts [options]="categoryChart()" class="chart"></div>
+      }
+    </div>
+
+    <div class="chart-card">
+      <h3>Order Status</h3>
+      @if (orderStatusChart()) {
+        <div echarts [options]="orderStatusChart()" class="chart"></div>
+      }
+    </div>
+  </div>
+
+  <div class="ai-panel">
+    <div class="ai-header">
+      <h2>🤖 AI Insights</h2>
+      <p>Ask questions about your data in plain English. The AI picks the right analytics tools automatically.</p>
+    </div>
+
+    <div class="ai-input-row">
+      <input
+        type="text"
+        [(ngModel)]="aiQuestion"
+        placeholder="e.g. Which products drive the most revenue?"
+        (keyup.enter)="askAi()"
+        [disabled]="aiLoading()"
+      />
+      <button class="btn btn-primary" (click)="askAi()" [disabled]="aiLoading() || !aiQuestion.trim()">
+        @if (aiLoading()) { <span class="spinner"></span> Thinking... }
+        @else { Ask AI }
+      </button>
+    </div>
+
+    <div class="quick-questions">
+      @for (q of quickQuestions; track q) {
+        <button class="chip" (click)="useQuickQuestion(q)">{{ q }}</button>
+      }
+    </div>
+
+    @if (aiError()) {
+      <div class="error-box">{{ aiError() }}</div>
+    }
+
+    @if (aiAnswer()) {
+      <div class="ai-answer">
+        <pre>{{ aiAnswer() }}</pre>
+      </div>
+    }
+  </div>
+</div>
